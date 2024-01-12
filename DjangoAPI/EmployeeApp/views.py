@@ -5,7 +5,6 @@ from django.http.response import JsonResponse
 
 from EmployeeApp.models import Departments,Employees
 from EmployeeApp.serializers import DepartmentSerializer,EmployeeSerializer
-
 from django.core.files.storage import default_storage
 
 @csrf_exempt

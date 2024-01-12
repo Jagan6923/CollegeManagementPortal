@@ -14,5 +14,5 @@ class EmployeeSerializer(serializers.ModelSerializer):
                   'EmployeeName',
                   'Department',
                   'DateOfJoining',
-                  'PhotoFileName')
-                  
+                  'PhotoFileName'
+                  )

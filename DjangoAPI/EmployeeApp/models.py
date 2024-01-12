@@ -10,3 +10,6 @@ class Employees(models.Model):
     Department = models.CharField(max_length=100)
     DateOfJoining = models.DateField()
     PhotoFileName = models.CharField(max_length=100)
+
+class Feedback(models.Model):
+    Feedback= models.CharField(max_length=200)
