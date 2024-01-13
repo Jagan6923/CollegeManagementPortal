@@ -3,8 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from EmployeeApp.models import Departments,Employees
-from EmployeeApp.serializers import DepartmentSerializer,EmployeeSerializer
+from EmployeeApp.models import Departments,Employees,Feedback
+from EmployeeApp.serializers import DepartmentSerializer,EmployeeSerializer,FeedbackSerializer
 
 from django.core.files.storage import default_storage
 
@@ -63,6 +63,36 @@ def employeeApi(request,id=0):
 
     elif request.method=='DELETE':
         employee=Employees.objects.get(EmployeeId=id)
+        employee.delete()
+        return JsonResponse("Deleted Succeffully!!", safe=False)
+
+
+@csrf_exempt
+def feedbackApi(request,id=0):
+    if request.method=='GET':
+        feedback = Feedback.objects.all()
+        feedback_serializer = FeedbackSerializer(feedback, many=True)
+        return JsonResponse(feedback_serializer.data, safe=False)
+
+    elif request.method=='POST':
+        feedback_data=JSONParser().parse(request)
+        feedback_serializer = FeedbackSerializer(data=feedback_data)
+        if feedback_serializer.is_valid():
+            feedback_serializer.save()
+            return JsonResponse("Added Successfully!!" , safe=False)
+        return JsonResponse("Failed to Add.",safe=False)
+    
+    elif request.method=='PUT':
+        feedback_data = JSONParser().parse(request)
+        feedback=Feedback.objects.get(FeedbackId=feedback_data['FeedbackId'])
+        feedback_serializer=FeedbackSerializer(feedback,data=feedback_data)
+        if feedback_serializer.is_valid():
+            feedback_serializer.save()
+            return JsonResponse("Updated Successfully!!", safe=False)
+        return JsonResponse("Failed to Update.", safe=False)
+
+    elif request.method=='DELETE':
+        feedback=Feedback.objects.get(FeedbackIdId=id)
         employee.delete()
         return JsonResponse("Deleted Succeffully!!", safe=False)
 

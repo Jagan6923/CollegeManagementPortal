@@ -12,4 +12,6 @@ class Employees(models.Model):
     PhotoFileName = models.CharField(max_length=100)
 
 class Feedback(models.Model):
-    Feedback= models.CharField(max_length=200)
+    FeedbackId = models.AutoField(primary_key=True)
+    Feedbackmailid = models.CharField(max_length=100)
+    Feedback = models.CharField(max_length=100)
