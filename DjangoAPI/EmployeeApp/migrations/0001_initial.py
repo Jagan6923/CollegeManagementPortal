@@ -28,4 +28,13 @@ class Migration(migrations.Migration):
                 ('PhotoFileName', models.CharField(max_length=100)),
             ],
         ),
+      
+        migrations.CreateModel(
+            name='Feedback',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('Feedbackmailid', models.CharField(max_length=100)),
+                ('Feedback', models.CharField(max_length=100)),
+            ],
+        ),
     ]
